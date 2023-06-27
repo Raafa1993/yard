@@ -1,16 +1,30 @@
-import { useState } from "react";
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_700Bold,
+  Inter_600SemiBold,
+} from "@expo-google-fonts/inter";
+
 import { ThemeProvider } from "styled-components";
 import Routes from "./src/routes";
 import light from "./src/theme/light";
-import { SignIn } from "./src/screens/SignIn";
+import { Loading } from "./src/components/Loading";
+import AppProvider from "./src/hooks";
 
 export default function App() {
-  const [user, setUser] = useState<null | boolean>(false);
+  const [hasLoadedFonts] = useFonts({
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+  });
 
   return (
-    <ThemeProvider theme={light}>
-      {user ? <Routes /> : <SignIn />}
-      
-    </ThemeProvider>
+    <AppProvider>
+      <ThemeProvider theme={light}>
+        {hasLoadedFonts ? <Routes /> : <Loading />}
+      </ThemeProvider>
+    </AppProvider>
   );
 }

@@ -1,79 +1,112 @@
-import React from "react";
 import {
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   View,
-  TextInput,
-  TouchableOpacity,
-  Text,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+import Button from "../../components/Button";
+import { ControlledInput } from "../../components/ControlledInput";
 import logoImg from "../../assets/logo.png";
 
-import { Container, CreateAccountButton, CreateAccountButtonText, ForgotPassword, ForgotPasswordText, Title } from "./styles";
+import { Container, ForgotPassword, ForgotPasswordText, Title } from "./styles";
+import { useAuth } from "../../hooks/auth";
+import { useNavigation } from "@react-navigation/native";
+
+const createSignInFormSchema = z.object({
+  name: z.string().nonempty("O usuário é obrigatório"),
+  password: z.string().min(6, "A senha precisa de no minimo 6 caracteres"),
+});
+
+type CreatedUserFormData = z.infer<typeof createSignInFormSchema>;
 
 export function SignIn() {
-  // const navigation = useNavigation<any>();
+  const { signIn } = useAuth();
+  const navigation = useNavigation();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreatedUserFormData>({
+    resolver: zodResolver(createSignInFormSchema),
+    defaultValues: {
+      name: "",
+      password: "",
+    },
+    mode: "all",
+    criteriaMode: "all",
+  });
+
+  async function handleOnSignIn(data: CreatedUserFormData) {
+    // setOutput(JSON.stringify(data, null, 2));
+    console.log("FORMDATA", data);
+    try {
+      await signIn({
+        name: data.name,
+        password: data.password,
+      });
+
+      // navigation.navigate("home");
+    } catch (error: any) {
+      console.log(error);
+      Alert.alert("Atenção", "error");
+    }
+  }
 
   return (
-
-    <>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        enabled
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      enabled
+    >
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ flex: 1 }}
       >
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{ flex: 1 }}
-        >
-          <Container>
-            <Image source={logoImg} />
+        <Container>
+          <Image source={logoImg} />
 
-            <View>
-              <Title>Faça seu logon</Title>
-            </View>
+          <View>
+            <Title>Faça seu Login</Title>
+          </View>
 
-            <View>
+          <View style={{ width: "100%" }}>
+            <ControlledInput
+              name="name"
+              control={control}
+              icon="user"
+              placeholder="Usuário"
+              autoCapitalize="none"
+              error={errors.name}
+            />
 
-              <TextInput
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                placeholder="E-mail"
-                returnKeyType="next"
-              />
+            <ControlledInput
+              name="password"
+              control={control}
+              icon="lock"
+              placeholder="Senha"
+              secureTextEntry
+              error={errors.password}
+            />
 
-              <TextInput
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                placeholder="E-mail"
-                returnKeyType="next"
-              />
+            <Button
+              style={{ marginTop: 22 }}
+              onPress={handleSubmit(handleOnSignIn)}
+              text="Entrar"
+            />
+          </View>
 
-              <TouchableOpacity
-                onPress={() => console.log('SEND')}
-              >
-                <Text>Entrar</Text>
-              </TouchableOpacity>
-            </View>
-
-            <ForgotPassword>
-                <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-              </ForgotPassword>
-          </Container>
-        </ScrollView>
-      </KeyboardAvoidingView>
-
-      <CreateAccountButton
-   
-      >
-      <Feather name="log-in" size={20} color="#ff9000" />
-      <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
-      </CreateAccountButton>
-    </>
+          <ForgotPassword>
+            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+          </ForgotPassword>
+        </Container>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }

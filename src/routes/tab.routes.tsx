@@ -1,32 +1,47 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 
-import Feed from "../screens/Feed";
-import New from "../screens/New";
+import { Settings } from "../screens/Settings";
+import { Home } from "../screens/Home";
 
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: "#4D7ED7",
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: "#101828",
+          height: 60,
+          paddingBottom: 4,
+          borderTopWidth: 0,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: "500",
+        },
+      }}
+    >
       <Tab.Screen
-        name="feed"
-        component={Feed}
+        name="home"
+        component={Home}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather name="home" color={color} size={size} />
           ),
-          tabBarLabel: "Inicio",
+          tabBarLabel: "Home",
         }}
       />
       <Tab.Screen
-        name="new"
-        component={New}
+        name="settings"
+        component={Settings}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Feather name="plus" color={color} size={size} />
+            <Feather name="settings" color={color} size={size} />
           ),
-          tabBarLabel: "Novo",
+          tabBarLabel: "Settings",
         }}
       />
     </Tab.Navigator>
