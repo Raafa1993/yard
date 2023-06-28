@@ -43,5 +43,16 @@ export default {
     error_700: "#B42318",
     error_800: "#912018",
     error_900: "#7A271A",
+
+    warning_50: "#FFFAEB",
+    warning_100: "#FEF0C7",
+    warning_200: "#FEDF89",
+    warning_300: "#FEC84B",
+    warning_400: "#FDB022",
+    warning_500: "#F79009",
+    warning_600: "#DC6803",
+    warning_700: "#B54708",
+    warning_800: "#93370D",
+    warning_900: "#7A2E0E",
   },
 };

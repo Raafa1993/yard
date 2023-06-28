@@ -9,29 +9,24 @@ import React, {
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import api from "../services/api";
-
 interface User {
   id: string;
   name: string;
 }
-
 interface SignInCredencials {
   name: string;
   password: string;
 }
-
 interface AuthState {
   user: User;
   token: string;
 }
-
 interface AuthContextData {
   user: User;
   loading: boolean;
   signIn(credencials: SignInCredencials): Promise<void>;
   signOut(): void;
 }
-
 interface TransactionsProviderProps {
   children: ReactNode;
 }
@@ -62,9 +57,6 @@ function AuthProvider({ children }: TransactionsProviderProps) {
   }, []);
 
   const signIn = useCallback(async ({ name, password }: SignInCredencials) => {
-    console.log("SIGN-IN EMAIL", name);
-    console.log("SIGN-IN PASSWORD", password);
-
     const formData = {
       username: name,
       password,
@@ -72,9 +64,6 @@ function AuthProvider({ children }: TransactionsProviderProps) {
     };
 
     const response = await api.post("logincopart", formData);
-
-    console.log("RESPONSE", response.data);
-
     const { userId, userName, accessToken } = response.data;
 
     const responseUser = {
