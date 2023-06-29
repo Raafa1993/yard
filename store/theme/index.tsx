@@ -1,5 +1,6 @@
-import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { create } from "zustand";
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 type ThemeProps = "dark" | "light";
 
@@ -8,32 +9,16 @@ type StoreProps = {
   toggleTheme: (theme: ThemeProps) => void;
 };
 
-const getInitialTheme = async (): Promise<ThemeProps | null> => {
-  try {
-    const theme = await AsyncStorage.getItem("theme");
-    return theme as ThemeProps;
-  } catch (error) {
-    console.error("Error getting initial theme:", error);
-    return null;
-  }
-};
 
-export const useThemeStore = create<StoreProps>((set) => ({
+export const useThemeStore = create(persist<StoreProps>((set) => ({
   theme: "light",
-  toggleTheme: async (theme) => {
-    try {
-      await AsyncStorage.setItem("theme", theme);
+  toggleTheme: (theme) => {
       set(() => ({
         theme: theme,
       }));
-    } catch (error) {
-      console.error("Error setting theme:", error);
-    }
   },
+}), {
+  name: '@copartTheme',
+  storage: createJSONStorage(() => AsyncStorage)
 }));
 
-getInitialTheme().then((initialTheme) => {
-  if (initialTheme) {
-    useThemeStore.setState({ theme: initialTheme });
-  }
-});
