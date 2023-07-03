@@ -119,7 +119,6 @@ export function Home() {
             text="ENTREGA VMC"
             type="vmc"
             isActive={statusSelected === "vmc"}
-            style={{ marginLeft: 10 }}
             onPress={() => setStatusSelected("vmc")}
           />
         </FieldGroup>

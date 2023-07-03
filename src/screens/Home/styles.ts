@@ -31,6 +31,7 @@ export const Content = styled.View`
 
 export const FieldGroup = styled.View`
   flex-direction: row;
+  gap: 12px;
   width: 100%;
 `;
 
