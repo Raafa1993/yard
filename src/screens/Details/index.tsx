@@ -9,6 +9,8 @@ import Button from "../../components/Button";
 import { ModalView } from "../../components/ModalView";
 import { Text, View } from "react-native";
 import ButtonFilter from "../../components/ButtonFilter";
+import Select from "../../components/Select";
+import CheckBox from "../../components/CheckBox";
 
 type RouteParams = {
   orderId: string;
@@ -29,13 +31,83 @@ export function Details() {
     setOpenGuildsModal(false);
   }
 
+  const [items, setItems] = useState([
+    {
+      label: "Selecione um item...",
+      value: null,
+    },
+    {
+      label: "Apple",
+      value: "apple",
+    },
+    {
+      label: "Banana",
+      value: "banana",
+    },
+  ]);
+
+  const [value, setValue] = useState<any>("");
+
   return (
     <Container>
       <StatusBar style="light" translucent={false} backgroundColor="#101828" />
 
       <Header title={`Veiculo ${orderId}`} />
 
-      <Button text="Abrir Modal" onPress={handleOpenGuilds} />
+      <View style={{ padding: 14, gap: 10 }}>
+        <Button text="Abrir Modal" onPress={handleOpenGuilds} />
+
+        <Select
+          label="Placa do veiculo"
+          icon="settings"
+          options={items}
+          onValueChange={(itemSelected) => setValue(itemSelected)}
+          value={value}
+        />
+        <Select
+          label="Placa do veiculo"
+          icon="settings"
+          options={items}
+          onValueChange={(itemSelected) => setValue(itemSelected)}
+          value={value}
+        />
+
+        <Select
+          label="Placa do veiculo"
+          icon="settings"
+          options={items}
+          onValueChange={(itemSelected) => setValue(itemSelected)}
+          value={value}
+        />
+
+        <CheckBox
+          onChange={(item) => console.log("BOX", item)}
+          options={[{ id: 1, label: "One" }]}
+          label="Aceite os termos"
+        />
+
+        <CheckBox
+          onChange={(item) => console.log("BOX", item)}
+          options={[
+            { id: 1, label: "multiple_1" },
+            { id: 2, label: "multiple_2" },
+          ]}
+          multiple
+          label="Selecione uma opção"
+          isRadius
+          isDisabled
+        />
+
+        <CheckBox
+          onChange={(item) => console.log("BOX", item)}
+          options={[
+            { id: 1, label: "Sim" },
+            { id: 2, label: "Não" },
+          ]}
+          direction="row"
+          label="Sim ou Não"
+        />
+      </View>
 
       <ModalView visible={openGuildsModa} closeModal={handleCloseGuilds}>
         <View>
