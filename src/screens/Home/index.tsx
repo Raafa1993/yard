@@ -79,7 +79,7 @@ const orderList = [
   },
 ];
 
-export function Home() {
+export function Home({ navigation }: any) {
   const { signOut } = useAuth();
   const [statusSelected, setStatusSelected] = useState<"remocao" | "vmc">(
     "remocao"
@@ -87,10 +87,10 @@ export function Home() {
   const [orders, setOrders] = useState<OrderProps[]>(orderList as OrderProps[]);
   const filterOrder = orders.filter((item) => item.type === statusSelected);
 
-  const navigation = useNavigation();
+  const history = useNavigation();
 
   function handleOpenDetails(orderId: string) {
-    navigation.navigate("details", { orderId });
+    history.navigate("details", { orderId });
   }
 
   return (
@@ -100,8 +100,8 @@ export function Home() {
       <Header>
         <Image source={Logo} />
 
-        <SignOutButton onPress={() => signOut()}>
-          <Feather name="log-out" color="#fff" size={26} />
+        <SignOutButton onPress={() => navigation.openDrawer()}>
+          <Feather name="menu" color="#fff" size={26} />
         </SignOutButton>
       </Header>
 

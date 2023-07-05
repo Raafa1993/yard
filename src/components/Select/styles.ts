@@ -4,7 +4,7 @@ export const Container = styled.View``;
 
 export const Content = styled.View`
   width: 100%;
-  height: 55px;
+  height: 56px;
   background: ${({ theme }) => theme.colors.gray_900};
   border-radius: 6px;
   margin-bottom: 4px;

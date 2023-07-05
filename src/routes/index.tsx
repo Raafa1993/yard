@@ -1,16 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
-import StackRoutes from "./stack.routes";
 import AuthRoutes from "./auth.routes";
 import { useAuth } from "../hooks/auth";
+import DrawerRoutes from "./drawer.routes";
 
 export default function Routes() {
   const { user, loading } = useAuth();
 
-  console.log(user);
-
   return (
     <NavigationContainer>
-      {user ? <StackRoutes /> : <AuthRoutes />}
+      {user ? <DrawerRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   );
 }

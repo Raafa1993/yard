@@ -63,7 +63,7 @@ export const Box = styled.View<CheckBoxProps>`
 
 export const TextLabel = styled.Text<CheckBoxProps>`
   color: ${({ isDisabled }) => (isDisabled ? "#D0D5DD" : "#fff")};
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Inter_400Regular";
   text-transform: capitalize;
 `;
