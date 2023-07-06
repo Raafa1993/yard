@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const Content = styled.View<Props>`
   width: 100%;
-  height: 56px;
+  height: 110px;
   padding-inline-start: 16px;
   background: ${({ theme }) => theme.colors.gray_900};
   border-radius: 6px;
@@ -37,20 +37,13 @@ export const Label = styled.Text`
   text-transform: capitalize;
 `;
 
-export const IconContainer = styled.View`
-  margin: 0 14px;
-  position: absolute;
-  left: 0;
-  z-index: 2;
-  pointer-events: none;
-`;
-
 export const InputText = styled(TextInput).attrs({
   placeholderTextColor: "#7C7C8A",
+  textAlignVertical: "top",
 })<Props>`
   flex: 1;
   height: 100%;
-  padding-left: ${({ isIcon }) => (isIcon ? "54px" : "16px")};
+  padding: 16px;
   color: #fff;
   font-size: 16px;
   font-family: "Inter_400Regular";

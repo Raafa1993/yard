@@ -17,7 +17,7 @@ export const Content = styled.View`
 `;
 
 export const TextLabel = styled.Text`
-  color: #fff;
+  color: ${({ theme }) => theme.colors.gray_200};
   font-size: 16px;
   font-family: "Inter_400Regular";
   margin-bottom: 6px;

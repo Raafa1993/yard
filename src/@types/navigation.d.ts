@@ -3,7 +3,10 @@ export declare global {
     interface RootParamList {
       home: undefined;
       register: undefined;
-      details: { orderId: string };
+      detailsVehicle: { orderId: string };
+      information: { orderId: string };
+      checklist: undefined;
+      photos: undefined;
     }
   }
 }

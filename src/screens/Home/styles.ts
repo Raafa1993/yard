@@ -9,7 +9,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   padding: 24px;
-  height: 98px;
+  /* height: 98px; */
   background: ${({ theme }) => theme.colors.gray_900};
 
   flex-direction: row;

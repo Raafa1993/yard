@@ -19,6 +19,7 @@ import {
   Header,
   SignOutButton,
 } from "./styles";
+import Button from "../../components/Button";
 
 const orderList = [
   {
@@ -90,7 +91,7 @@ export function Home({ navigation }: any) {
   const history = useNavigation();
 
   function handleOpenDetails(orderId: string) {
-    history.navigate("details", { orderId });
+    history.navigate("detailsVehicle", { orderId });
   }
 
   return (
@@ -147,6 +148,10 @@ export function Home({ navigation }: any) {
           </View>
         )}
       />
+
+      <View style={{ paddingHorizontal: 16, marginBottom: 12 }}>
+        <Button text="Cadastrar Entrega Direta" />
+      </View>
     </Container>
   );
 }

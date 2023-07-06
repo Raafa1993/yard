@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { TextInputProps } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { Container, IconContainer, InputText, Content, Label } from "./styles";
+import { Container, InputText, Content, Label } from "./styles";
 
 export type InputProps = TextInputProps & {
-  icon?: React.ComponentProps<typeof Feather>["name"];
-  value?: string;
   label?: string;
 };
 
-export function Input({ icon, value, label, ...rest }: InputProps) {
+export function TextArea({ label, ...rest }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
 
   function handleInputFocus() {
     setIsFocused(true);
@@ -19,29 +15,18 @@ export function Input({ icon, value, label, ...rest }: InputProps) {
 
   function handleInputBlur() {
     setIsFocused(false);
-    setIsFilled(!!value);
   }
 
   return (
     <Container>
       {label && <Label>text label</Label>}
       <Content isFocused={isFocused}>
-        {icon && (
-          <IconContainer>
-            <Feather
-              name={icon}
-              size={24}
-              color={isFocused || isFilled ? "#4D7ED7" : "#D0D5DD"}
-            />
-          </IconContainer>
-        )}
-
         <InputText
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           isFocused={isFocused}
-          isIcon={!!icon}
-          value={value}
+          numberOfLines={10}
+          multiline={true}
           {...rest}
         />
       </Content>
