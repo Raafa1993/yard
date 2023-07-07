@@ -16,7 +16,7 @@ export const Container = styled.View`
 `;
 
 export const Content = styled.View<ContainerDirectionProps>`
-  gap: 10px;
+  gap: 4px;
 
   ${({ direction }) =>
     direction === "row" &&

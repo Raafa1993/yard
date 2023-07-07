@@ -1,123 +1,74 @@
-import React, { useRef, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-  ViewProps,
-} from "react-native";
+import React, { ReactNode, useState } from "react";
+import { TouchableWithoutFeedback, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-import List, { List as ListModel } from "./List";
-import ListItem from "./ListItem";
-import { measure, runOnUI, useAnimatedRef } from "react-native-reanimated";
+import {
+  measure,
+  runOnUI,
+  useAnimatedRef,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from "react-native-reanimated";
+import { Container, TextTitle, ViewContent, ViewHeader } from "./styles";
 
-const list: ListModel = {
-  name: "Dianteira",
-  items: [
-    { name: "Nathaniel Fitzgerald", points: "0" },
-    { name: "Lawrence Fullter Fitzgerald", points: "1" },
-    { name: "Jacob Mullins", points: "0" },
-    { name: "Jesus Lewis", points: "1" },
-    { name: "Johnny Marr", points: "0" },
-  ],
-};
+interface AcordionProps {
+  children: ReactNode;
+  title: string;
+}
 
-const list2: ListModel = {
-  name: "Traseira",
-  items: [
-    { name: "Nathaniel Fitzgerald", points: "$3.45" },
-    { name: "Lawrence Fullter Fitzgerald", points: "$3.45" },
-    { name: "Jacob Mullins", points: "$3.45" },
-  ],
-};
-
-const list3: ListModel = {
-  name: "Total Points",
-  items: [
-    { name: "Nathaniel Fitzgerald", points: "0" },
-    { name: "Lawrence Fullter Fitzgerald", points: "1" },
-  ],
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#101828",
-    // padding: 16,
-    borderRadius: 5,
-    marginBottom: 12,
-  },
-  content: {
-    backgroundColor: "#101828",
-    padding: 16,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#fff",
-  },
-  items: {
-    overflow: "hidden",
-  },
-});
-
-export default function Accordion() {
+export default function Accordion({ title = "", children }: AcordionProps) {
   const viewRef = useAnimatedRef<View>();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIOpen] = useState(false);
+  const open = useSharedValue(false);
+  const progress = useDerivedValue(() =>
+    open.value ? withSpring(1) : withTiming(0)
+  );
+
+  const height: any = useSharedValue(0);
+  const style = useAnimatedStyle(() => ({
+    height: height.value * progress.value + 2,
+    opacity: progress.value === 0 ? 0 : withTiming(1),
+  }));
 
   const handleOnActive = () => {
-    setIsOpen((state) => !state);
-
-    runOnUI(() => {
-      "worklet";
-      const isHeight = measure(viewRef)?.height;
-      console.log(isHeight);
-    })();
-
-    // if (viewRef.current) {
-    //   //   const {  } = viewRef.current.measure(
-    //   //     (x, y, width, height, pageX, pageY) => {
-    //   //       return { height };
-    //   //     }
-    //   //   );
-    // }
-  };
-
-  const style = {
-    height: isOpen ? "100%" : 1,
-    opacity: isOpen ? 1 : 0,
+    if (height.value === 0) {
+      runOnUI(() => {
+        "worklet";
+        height.value = measure(viewRef)?.height;
+      })();
+    }
+    setIOpen((state) => !state);
+    open.value = !open.value;
   };
 
   return (
-    <View style={styles.container}>
+    <Container>
       <TouchableWithoutFeedback onPress={handleOnActive}>
-        <View style={styles.content}>
-          <Text style={styles.title}>Dianteira</Text>
+        <ViewHeader>
+          <TextTitle>{title}</TextTitle>
           <Feather
             name={isOpen ? "minus" : "plus"}
             size={20}
             color={isOpen ? "#FFF" : "#4D7ED7"}
           />
-        </View>
+        </ViewHeader>
       </TouchableWithoutFeedback>
 
-      <View style={[styles.items, style]}>
+      <ViewContent style={style}>
         <View ref={viewRef}>
-          {list.items.map((item, key) => (
+          {children}
+          {/* {list.items.map((item, key) => (
             <ListItem
               key={key}
               isLast={key === list.items.length - 1}
               {...{ item }}
             />
-          ))}
+          ))} */}
         </View>
-      </View>
-    </View>
+      </ViewContent>
+    </Container>
   );
 }

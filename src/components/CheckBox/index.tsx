@@ -67,7 +67,7 @@ export default function CheckBox({
               {selected.includes(row.id) && (
                 <Feather
                   name="check"
-                  color={isDisabled ? "#D0D5DD" : "#4D7ED7"}
+                  color={isDisabled ? "#9DBAF0" : "#4D7ED7"}
                   size={20}
                 />
               )}
