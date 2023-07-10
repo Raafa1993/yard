@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import CheckBox from "../CheckBox";
 
 const LIST_ITEM_HEIGHT = 54;
 const styles = StyleSheet.create({
@@ -50,7 +51,7 @@ export interface ListItem {
 }
 
 interface ListItemProps {
-  item: ListItem;
+  item: any;
   isLast: boolean;
 }
 
@@ -66,35 +67,18 @@ const ListItem = ({ item, isLast }: ListItemProps) => {
         },
       ]}
     >
-      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.name}>{item.titulo}</Text>
       <View style={{ alignItems: "center", gap: 8, flexDirection: "row" }}>
-        <View
-          style={
-            item.points === "1"
-              ? styles.pointsContainerActive
-              : styles.pointsContainerInactive
-          }
-        >
-          <Text style={styles.points}>{item.points}</Text>
-        </View>
-        <View
-          style={
-            item.points === "1"
-              ? styles.pointsContainerActive
-              : styles.pointsContainerInactive
-          }
-        >
-          <Text style={styles.points}>{item.points}</Text>
-        </View>
-        <View
-          style={
-            item.points === "1"
-              ? styles.pointsContainerInactive
-              : styles.pointsContainerActive
-          }
-        >
-          <Text style={styles.points}>{item.points}</Text>
-        </View>
+        <CheckBox
+          direction="row"
+          multiple={false}
+          options={item.checkboxes.map((check: any) => ({
+            ...check,
+            label: "",
+          }))}
+          onChange={(e) => console.log("CHECK", e)}
+          // isDisabled
+        />
       </View>
     </View>
   );

@@ -65,11 +65,7 @@ export default function CheckBox({
               isDisabled={isDisabled}
             >
               {selected.includes(row.id) && (
-                <Feather
-                  name="check"
-                  color={isDisabled ? "#9DBAF0" : "#4D7ED7"}
-                  size={20}
-                />
+                <Feather name="check" color={"#4D7ED7"} size={20} />
               )}
             </Box>
             <TextLabel isDisabled={isDisabled}>{row.label}</TextLabel>

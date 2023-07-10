@@ -31,48 +31,82 @@ const list: List = {
 };
 
 interface CheckboxValues {
-  iv: boolean;
-  ba: boolean;
-  a: boolean;
-  i: boolean;
+  id: number;
+  label: string;
 }
 
 interface TabelaItem {
   titulo: string;
   descricao: string;
-  checkboxes: CheckboxValues;
+  checkboxes: CheckboxValues[];
 }
 
 const listTable: TabelaItem[] = [
   {
     titulo: "Item 1",
     descricao: "Descrição do item 1",
-    checkboxes: {
-      iv: false,
-      ba: true,
-      a: false,
-      i: true,
-    },
+    checkboxes: [
+      {
+        id: 1,
+        label: "IV",
+      },
+      {
+        id: 2,
+        label: "BA",
+      },
+      {
+        id: 3,
+        label: "A",
+      },
+      {
+        id: 4,
+        label: "I",
+      },
+    ],
   },
   {
     titulo: "Item 2",
     descricao: "Descrição do item 2",
-    checkboxes: {
-      iv: true,
-      ba: true,
-      a: false,
-      i: false,
-    },
+    checkboxes: [
+      {
+        id: 1,
+        label: "IV",
+      },
+      {
+        id: 2,
+        label: "BA",
+      },
+      {
+        id: 3,
+        label: "A",
+      },
+      {
+        id: 4,
+        label: "I",
+      },
+    ],
   },
   {
     titulo: "Item 3",
     descricao: "Descrição do item 3",
-    checkboxes: {
-      iv: true,
-      ba: false,
-      a: true,
-      i: true,
-    },
+    checkboxes: [
+      {
+        id: 1,
+        label: "IV",
+      },
+      {
+        id: 2,
+        label: "BA",
+      },
+      {
+        id: 3,
+        label: "A",
+      },
+      {
+        id: 4,
+        label: "I",
+      },
+    ],
   },
 ];
 
@@ -87,7 +121,7 @@ export default function Checklist() {
           </ViewInfo>
         </ViewCardInfo>
 
-        <Accordion title="Dianteira">
+        {/* <Accordion title="Dianteira">
           {list.items.map((item, key) => (
             <ListItem
               key={key}
@@ -105,37 +139,45 @@ export default function Checklist() {
               {...{ item }}
             />
           ))}
-        </Accordion>
+        </Accordion> */}
 
-        <Accordion title="Traseira">
-          {listTable.map((row) => (
+        <Accordion title="Traseira" data={listTable} />
+        {/* {listTable.map((row) => (
             <View
               key={row.titulo}
               style={{
-                width: "100%",
-                height: 54,
-                padding: 14,
+                backgroundColor: "#101828",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                alignItems: "center",
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderBottomWidth: 1,
+                borderColor: "#1D2939",
+                height: 54,
               }}
             >
               <Text style={{ color: "#fff" }}>{row.titulo}</Text>
-              <View style={{ alignItems: "center", flexDirection: "row" }}>
+              <View
+                style={{
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
                 <CheckBox
                   direction="row"
-                  multiple
-                  options={[
-                    { id: 1, label: "" },
-                    { id: 2, label: "" },
-                    { id: 3, label: "" },
-                    { id: 4, label: "" },
-                  ]}
+                  multiple={false}
+                  options={row.checkboxes.map((check) => ({
+                    ...check,
+                    label: "",
+                  }))}
                   onChange={(e) => console.log("CHECK", e)}
+                  // isDisabled
                 />
               </View>
             </View>
           ))}
-        </Accordion>
+        </Accordion> */}
       </ScrollView>
     </Container>
   );

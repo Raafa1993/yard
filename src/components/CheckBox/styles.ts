@@ -51,14 +51,12 @@ export const Box = styled.View<CheckBoxProps>`
     css`
       background: #aec6ff;
       border-color: #4d7ed7;
-    `}
-
-  ${({ isDisabled }) =>
+    `}/* ${({ isDisabled }) =>
     isDisabled &&
     css`
       background: #eaecf0;
       border-color: #98a2b3;
-    `}
+    `} */
 `;
 
 export const TextLabel = styled.Text<CheckBoxProps>`
