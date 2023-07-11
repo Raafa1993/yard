@@ -24,3 +24,19 @@ export const TextTitle = styled.Text`
 export const ViewContent = styled(Animated.View)`
   overflow: hidden;
 `;
+
+export const ViewRow = styled.View`
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 34px;
+  border-bottom: 1px;
+  border-bottom-width: 1px;
+  border-color: #1d2939;
+  gap: 26px;
+`;
+
+export const TextRow = styled.Text`
+  font-size: 16px;
+  color: #d0d5dd;
+  height: 28px;
+`;

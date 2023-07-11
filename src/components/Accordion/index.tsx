@@ -1,5 +1,5 @@
-import React, { ReactNode, useState } from "react";
-import { Text, TouchableWithoutFeedback, View } from "react-native";
+import React, { useState } from "react";
+import { TouchableWithoutFeedback, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import {
@@ -12,20 +12,21 @@ import {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import { Container, TextTitle, ViewContent, ViewHeader } from "./styles";
 import ListItem from "./ListItem";
-
+import {
+  Container,
+  TextRow,
+  TextTitle,
+  ViewContent,
+  ViewHeader,
+  ViewRow,
+} from "./styles";
 interface AcordionProps {
-  children?: ReactNode;
   title: string;
   data: any;
 }
 
-export default function Accordion({
-  title = "",
-  data,
-  children,
-}: AcordionProps) {
+export default function Accordion({ title = "", data }: AcordionProps) {
   const viewRef = useAnimatedRef<View>();
   const [isOpen, setIOpen] = useState(false);
   const open = useSharedValue(false);
@@ -43,7 +44,7 @@ export default function Accordion({
     if (height.value === 0) {
       runOnUI(() => {
         "worklet";
-        height.value = measure(viewRef)?.height + 16;
+        height.value = measure(viewRef)?.height;
       })();
     }
     setIOpen((state) => !state);
@@ -65,60 +66,12 @@ export default function Accordion({
 
       <ViewContent style={style}>
         <View ref={viewRef}>
-          <View
-            style={{
-              backgroundColor: "#101828",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              alignItems: "flex-end",
-              paddingHorizontal: 12,
-              borderBottomWidth: 1,
-              borderColor: "#1D2939",
-              gap: 14,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 16,
-                color: "#D0D5DD",
-                width: 28,
-                height: 28,
-              }}
-            >
-              IV
-            </Text>
-            <Text
-              style={{
-                fontSize: 16,
-                color: "#D0D5DD",
-                width: 28,
-                height: 28,
-              }}
-            >
-              BA
-            </Text>
-            <Text
-              style={{
-                fontSize: 16,
-                color: "#D0D5DD",
-                width: 28,
-                height: 28,
-              }}
-            >
-              A
-            </Text>
-            <Text
-              style={{
-                fontSize: 16,
-                color: "#D0D5DD",
-                width: 28,
-                height: 28,
-              }}
-            >
-              I
-            </Text>
-          </View>
-          {/* {children} */}
+          <ViewRow>
+            <TextRow>IV</TextRow>
+            <TextRow>BA</TextRow>
+            <TextRow>A</TextRow>
+            <TextRow>I</TextRow>
+          </ViewRow>
           {data.map((item: any, key: any) => (
             <ListItem
               key={key}

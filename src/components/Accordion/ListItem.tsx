@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CheckBox from "../CheckBox";
+import { TextRow } from "./styles";
 
 const LIST_ITEM_HEIGHT = 54;
 const styles = StyleSheet.create({
@@ -14,34 +15,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#1D2939",
     height: LIST_ITEM_HEIGHT,
-  },
-  name: {
-    fontSize: 16,
-    color: "#D0D5DD",
-  },
-  pointsContainerActive: {
-    flexDirection: "row",
-    gap: 12,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 4,
-    backgroundColor: "#4D7ED7",
-    width: 28,
-    height: 28,
-  },
-  pointsContainerInactive: {
-    flexDirection: "row",
-    gap: 12,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 4,
-    backgroundColor: "#475467",
-    width: 28,
-    height: 28,
-  },
-  points: {
-    color: "white",
-    fontWeight: "bold",
   },
 });
 
@@ -67,7 +40,7 @@ const ListItem = ({ item, isLast }: ListItemProps) => {
         },
       ]}
     >
-      <Text style={styles.name}>{item.titulo}</Text>
+      <TextRow>{item.titulo}</TextRow>
       <View style={{ alignItems: "center", gap: 8, flexDirection: "row" }}>
         <CheckBox
           direction="row"

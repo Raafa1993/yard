@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { StatusBar } from "expo-status-bar";
 import { Feather } from "@expo/vector-icons";
 
-import { useAuth } from "../../hooks/auth";
 import { Input } from "../../components/Input";
 import ButtonFilter from "../../components/ButtonFilter";
 import Order, { OrderProps } from "../../components/Order";
+
+import { useQueryClient } from "@tanstack/react-query";
 
 import Logo from "../../assets/logoName.png";
 import {
@@ -20,6 +21,9 @@ import {
   SignOutButton,
 } from "./styles";
 import Button from "../../components/Button";
+import { useToast } from "../../hooks/toast";
+import api from "../../services/api";
+import useFetch from "../../hooks/useFetch";
 
 const orderList = [
   {
@@ -81,7 +85,7 @@ const orderList = [
 ];
 
 export function Home({ navigation }: any) {
-  const { signOut } = useAuth();
+  const { addToast } = useToast();
   const [statusSelected, setStatusSelected] = useState<"remocao" | "vmc">(
     "remocao"
   );
@@ -93,6 +97,16 @@ export function Home({ navigation }: any) {
   function handleOpenDetails(orderId: string) {
     history.navigate("detailsVehicle", { orderId });
   }
+
+  const { data } = useFetch(
+    "https://jsonplaceholder.typicode.com/todos",
+    "teste"
+  );
+
+  console.log(
+    "DATA",
+    data?.map((row: any) => row.id)
+  );
 
   return (
     <Container>
@@ -150,7 +164,16 @@ export function Home({ navigation }: any) {
       />
 
       <View style={{ paddingHorizontal: 16, marginBottom: 12 }}>
-        <Button text="Cadastrar Entrega Direta" />
+        <Button
+          text="Cadastrar Entrega Direta"
+          onPress={() => {
+            addToast({
+              title: "Atenção",
+              description: "Mensagem falhou",
+              type: "success",
+            });
+          }}
+        />
       </View>
     </Container>
   );
