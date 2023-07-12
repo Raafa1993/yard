@@ -31,6 +31,19 @@ export const TextNameUser = styled.Text`
   font-family: "Inter_600SemiBold";
 `;
 
+export const TextLocation = styled.Text`
+  color: #d1d3d4;
+  font-size: 12px;
+  font-family: "Inter_500Medium";
+`;
+
+export const ViewLocation = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+`;
+
 export const ViewList = styled.View`
   padding-bottom: 16px;
 `;

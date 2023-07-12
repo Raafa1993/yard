@@ -13,6 +13,6 @@ export default function useFetch(url: string, name: string) {
   return useQuery({
     queryKey: [name, url],
     queryFn: fetchData,
-    staleTime: 1000 * 60, // 1 minuto
+    staleTime: 1000 * 60 * 25, // 25 minuto
   });
 }

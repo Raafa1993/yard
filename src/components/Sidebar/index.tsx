@@ -21,6 +21,8 @@ import {
   ViewSectionItem,
   TextSectionItem,
   ButtonSignOut,
+  TextLocation,
+  ViewLocation,
 } from "./styles";
 
 export default function Sidebar({ ...props }: any) {
@@ -36,6 +38,10 @@ export default function Sidebar({ ...props }: any) {
           </ViewUserProfile>
           <ViewUserInfo>
             <TextNameUser>{user.name}</TextNameUser>
+            <ViewLocation>
+              <Feather name="map-pin" size={12} color="#fff" />
+              <TextLocation>{user.patio}</TextLocation>
+            </ViewLocation>
           </ViewUserInfo>
         </ViewUser>
 

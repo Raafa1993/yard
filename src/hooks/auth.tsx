@@ -12,10 +12,12 @@ import api from "../services/api";
 interface User {
   id: string;
   name: string;
+  patio: string;
 }
 interface SignInCredencials {
   name: string;
   password: string;
+  patio: string;
 }
 interface AuthState {
   user: User;
@@ -56,33 +58,37 @@ function AuthProvider({ children }: TransactionsProviderProps) {
     loadStoragedData();
   }, []);
 
-  const signIn = useCallback(async ({ name, password }: SignInCredencials) => {
-    const formData = {
-      username: name,
-      password,
-      version: "B QA",
-    };
+  const signIn = useCallback(
+    async ({ name, password, patio }: SignInCredencials) => {
+      const formData = {
+        username: name,
+        password,
+        version: "B QA",
+      };
 
-    const response = await api.post("logincopart", formData);
-    const { userId, userName, accessToken } = response.data;
+      const response = await api.post("logincopart", formData);
+      const { userId, userName, accessToken } = response.data;
 
-    const responseUser = {
-      id: String(userId),
-      name: userName,
-    };
+      const responseUser = {
+        id: String(userId),
+        name: userName,
+        patio,
+      };
 
-    await AsyncStorage.multiSet([
-      ["@Copart:token", accessToken],
-      ["@Copart:user", JSON.stringify(responseUser)],
-    ]);
+      await AsyncStorage.multiSet([
+        ["@Copart:token", accessToken],
+        ["@Copart:user", JSON.stringify(responseUser)],
+      ]);
 
-    api.defaults.headers.authorization = `Bearer ${accessToken}`;
+      api.defaults.headers.authorization = `Bearer ${accessToken}`;
 
-    setData({
-      token: accessToken,
-      user: responseUser,
-    });
-  }, []);
+      setData({
+        token: accessToken,
+        user: responseUser,
+      });
+    },
+    []
+  );
 
   const signOut = useCallback(async () => {
     await AsyncStorage.multiRemove(["@Copart:token", "@Copart:user"]);

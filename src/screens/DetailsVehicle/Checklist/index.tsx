@@ -9,6 +9,9 @@ import {
   ViewInfo,
   TextInfoTitle,
   TextInfoDescription,
+  ViewLegend,
+  TextStyleLegend,
+  ViewLEgendGroup,
 } from "./styles";
 export interface List {
   name: string;
@@ -99,8 +102,25 @@ export default function Checklist() {
       <ScrollView>
         <ViewCardInfo>
           <ViewInfo>
-            <TextInfoTitle>Legenda</TextInfoTitle>
-            <TextInfoDescription>123123154</TextInfoDescription>
+            <TextInfoTitle>Legenda Vistoria</TextInfoTitle>
+            <ViewLegend>
+              <ViewLEgendGroup>
+                <TextStyleLegend color="#F04438">IV</TextStyleLegend>
+                <TextInfoDescription>Impossivel</TextInfoDescription>
+              </ViewLEgendGroup>
+              <ViewLEgendGroup>
+                <TextStyleLegend color="#32D583">BA</TextStyleLegend>
+                <TextInfoDescription>Bom</TextInfoDescription>
+              </ViewLEgendGroup>
+              <ViewLEgendGroup>
+                <TextStyleLegend color="#F5A623">A</TextStyleLegend>
+                <TextInfoDescription>Avariado</TextInfoDescription>
+              </ViewLEgendGroup>
+              <ViewLEgendGroup>
+                <TextStyleLegend color="#996DFF">I</TextStyleLegend>
+                <TextInfoDescription>Inexistente</TextInfoDescription>
+              </ViewLEgendGroup>
+            </ViewLegend>
           </ViewInfo>
         </ViewCardInfo>
 

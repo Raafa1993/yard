@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import { Image, RefreshControl, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { StatusBar } from "expo-status-bar";
@@ -98,15 +98,17 @@ export function Home({ navigation }: any) {
     history.navigate("detailsVehicle", { orderId });
   }
 
-  const { data } = useFetch(
+  const [refreshing, setRefreshing] = useState(false);
+  const { data, isFetching, refetch, isStale } = useFetch(
     "https://jsonplaceholder.typicode.com/todos",
     "teste"
   );
 
-  console.log(
-    "DATA",
-    data?.map((row: any) => row.id)
-  );
+  const onRefres = useCallback(async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  }, []);
 
   return (
     <Container>
@@ -140,6 +142,13 @@ export function Home({ navigation }: any) {
       </Content>
 
       <FlatListOrders
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefres}
+            enabled={!isStale}
+          />
+        }
         data={filterOrder}
         keyExtractor={(item: any) => item.id}
         renderItem={({ item }: any) => (

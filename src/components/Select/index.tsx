@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
-import { IconContainer } from "../Input/styles";
 import { Picker, PickerProps } from "@react-native-picker/picker";
 import { Container, Content, TextLabel } from "./styles";
 

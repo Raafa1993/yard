@@ -17,18 +17,20 @@ import logoImg from "../../assets/logo.png";
 
 import { Container, ForgotPassword, ForgotPasswordText, Title } from "./styles";
 import { useAuth } from "../../hooks/auth";
-import { useNavigation } from "@react-navigation/native";
+import { ControlledSelect } from "../../components/ControlledSelect";
+import { useToast } from "../../hooks/toast";
 
 const createSignInFormSchema = z.object({
   name: z.string().nonempty("O usuário é obrigatório"),
   password: z.string().min(6, "A senha precisa de no minimo 6 caracteres"),
+  patio: z.string().nonempty("O patio é obrigatório"),
 });
 
 type CreatedUserFormData = z.infer<typeof createSignInFormSchema>;
 
 export function SignIn() {
   const { signIn } = useAuth();
-  const navigation = useNavigation();
+  const { addToast } = useToast();
   const {
     control,
     handleSubmit,
@@ -38,6 +40,7 @@ export function SignIn() {
     defaultValues: {
       name: "",
       password: "",
+      patio: "",
     },
     mode: "all",
     criteriaMode: "all",
@@ -50,12 +53,15 @@ export function SignIn() {
       await signIn({
         name: data.name,
         password: data.password,
+        patio: data.patio,
       });
-
-      // navigation.navigate("home");
     } catch (error: any) {
       console.log(error);
-      Alert.alert("Atenção", "error");
+      addToast({
+        title: "Atenção",
+        description: error,
+        type: "warning",
+      });
     }
   }
 
@@ -93,6 +99,18 @@ export function SignIn() {
               placeholder="Senha"
               secureTextEntry
               error={errors.password}
+            />
+
+            <ControlledSelect
+              name="patio"
+              control={control}
+              placeholder="Selecione uma opção"
+              error={errors.patio}
+              options={[
+                { label: "Selecione o patio", value: "" },
+                { label: "Patio Osasco", value: "osasco" },
+                { label: "Patio Itaqua", value: "itaqua" },
+              ]}
             />
 
             <Button
