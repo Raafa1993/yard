@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "./styles";
 import Button from "../../../components/Button";
+import { Input } from "../../../components/Input";
 
 export default function Information({ route }: any) {
   const { orderId } = route.params;

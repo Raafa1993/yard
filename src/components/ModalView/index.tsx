@@ -13,10 +13,7 @@ export function ModalView({ children, closeModal, ...rest }: Props) {
     <Modal {...rest}>
       <TouchableWithoutFeedback onPress={closeModal}>
         <Overlay>
-          <Container>
-            {/* <Bar /> */}
-            {children}
-          </Container>
+          <Container>{children}</Container>
         </Overlay>
       </TouchableWithoutFeedback>
     </Modal>

@@ -15,7 +15,6 @@ interface ItemProps {
   image: any;
   title: string;
 }
-
 interface Props {
   data: ItemProps;
   handleOnAddPhoto: () => void;

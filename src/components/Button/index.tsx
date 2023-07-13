@@ -3,12 +3,14 @@ import { Container, Title } from "./styles";
 
 interface Props extends TouchableOpacityProps {
   text: string;
+  size?: "xs" | "sm" | "md" | "lg";
+  variant?: "primary" | "outline";
 }
 
-export default function Button({ text, ...rest }: Props) {
+export default function Button({ text, size, variant, ...rest }: Props) {
   return (
-    <Container {...rest}>
-      <Title>{text}</Title>
+    <Container {...rest} size={size} variant={variant}>
+      <Title size={size}>{text}</Title>
     </Container>
   );
 }

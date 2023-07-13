@@ -146,7 +146,7 @@ export function Home({ navigation }: any) {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefres}
-            enabled={!isStale}
+            // enabled={!isStale}
           />
         }
         data={filterOrder}

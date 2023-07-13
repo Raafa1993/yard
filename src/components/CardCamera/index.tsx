@@ -1,14 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Camera } from "expo-camera";
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  BackHandler,
-} from "react-native";
+import { Text, StyleSheet, Image } from "react-native";
+import { Camera, FlashMode } from "expo-camera";
 import { Ionicons, Feather } from "@expo/vector-icons";
 
 import {
@@ -23,7 +15,6 @@ import {
   ViewHeaderCamera,
   ButtonActionCamera,
 } from "./styles";
-
 interface PropsCamera {
   onRequestClose: () => void;
   handleInputChange: (item: any) => void;
@@ -38,9 +29,7 @@ export default function CardCamera({
   const [hasCameraPermission, setHasCameraPermission] = useState<any>(null);
   const cameraRef = useRef<any>();
   const [photo, setPhoto] = useState<any>();
-  const [flashMode, setFlashMode] = useState<number>(
-    Camera.Constants.FlashMode.off
-  );
+  const [flashMode, setFlashMode] = useState(FlashMode.off);
 
   useEffect(() => {
     (async () => {
@@ -51,9 +40,7 @@ export default function CardCamera({
 
   function toggleFlashMode() {
     setFlashMode((prevFlashMode) =>
-      prevFlashMode === Camera.Constants.FlashMode.off
-        ? Camera.Constants.FlashMode.on
-        : Camera.Constants.FlashMode.off
+      prevFlashMode === FlashMode.off ? FlashMode.on : FlashMode.off
     );
   }
 
@@ -76,8 +63,6 @@ export default function CardCamera({
       handleInputChange(photo.base64);
       onRequestClose();
     };
-
-    console.log(flashMode);
 
     return (
       <ContainerModal>
@@ -136,17 +121,9 @@ export default function CardCamera({
               <ViewHeaderCamera>
                 <ButtonActionCamera onPress={toggleFlashMode}>
                   <Feather
-                    name={
-                      flashMode === Camera.Constants.FlashMode.off
-                        ? "zap-off"
-                        : "zap"
-                    }
+                    name={flashMode === FlashMode.off ? "zap-off" : "zap"}
                     size={16}
-                    color={
-                      flashMode === Camera.Constants.FlashMode.off
-                        ? "#fff"
-                        : "#4D7ED7"
-                    }
+                    color={flashMode === FlashMode.off ? "#fff" : "#4D7ED7"}
                   />
                 </ButtonActionCamera>
 
