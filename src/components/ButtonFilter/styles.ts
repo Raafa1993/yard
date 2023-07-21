@@ -31,7 +31,7 @@ export const Container = styled.TouchableOpacity.attrs({
 })<PropsButton>`
   flex: 1;
   height: 40px;
-  background: ${({ theme }) => theme.colors.gray_900};
+  background: ${({ theme }) => theme.colors.buttonFilterBackground};
   border-radius: 6px;
   justify-content: center;
   align-items: center;
@@ -45,7 +45,7 @@ export const Title = styled.Text<PropsButton>`
     isActive
       ? buttonTypeColorVariations[type]
       : css`
-          color: ${({ theme }) => theme.colors.gray_500};
+          color: ${({ theme }) => theme.colors.buttonFilterText};
         `}
   font-size: 12px;
 `;

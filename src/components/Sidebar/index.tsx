@@ -12,6 +12,7 @@ import { useAuth } from "../../hooks/auth";
 import {
   Container,
   ViewUser,
+  ViewDrawerScroll,
   ViewUserProfile,
   ViewUserInfo,
   TextNameUser,
@@ -31,15 +32,19 @@ export default function Sidebar({ ...props }: any) {
   const toggleSwitch = () => toggleTheme(theme === "light" ? "dark" : "light");
   return (
     <Container>
-      <DrawerContentScrollView style={{ backgroundColor: "#101828" }}>
+      <ViewDrawerScroll>
         <ViewUser>
           <ViewUserProfile>
-            <Feather name="user" color={"#fff"} size={28} />
+            <Feather name="user" color={"#FFF"} size={28} />
           </ViewUserProfile>
           <ViewUserInfo>
             <TextNameUser>{user.name}</TextNameUser>
             <ViewLocation>
-              <Feather name="map-pin" size={12} color="#fff" />
+              <Feather
+                name="map-pin"
+                size={12}
+                color={theme === "dark" ? "#D0D5DD" : "#98A2B3"}
+              />
               <TextLocation>{user.patio}</TextLocation>
             </ViewLocation>
           </ViewUserInfo>
@@ -65,11 +70,13 @@ export default function Sidebar({ ...props }: any) {
             />
           </ViewSectionItem>
         </ViewSection>
-      </DrawerContentScrollView>
+      </ViewDrawerScroll>
 
       <ButtonSignOut onPress={() => signOut()}>
         <Feather name="power" color="#F04438" size={24} />
-        <TextSectionItem style={{ color: "#F04438" }}>Sair</TextSectionItem>
+        <TextSectionItem style={{ color: "#F04438", fontWeight: "500" }}>
+          Sair
+        </TextSectionItem>
       </ButtonSignOut>
     </Container>
   );

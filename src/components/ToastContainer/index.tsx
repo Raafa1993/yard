@@ -5,12 +5,15 @@ import { ToastMessage } from "../../@types/ToastMessage";
 import Toast from "../ToastContainer/Toast";
 
 import { Container } from "./styles";
-
 interface ToastContainerProps {
   messages: ToastMessage[];
+  handleOnRemoveToast: (id: any) => void;
 }
 
-export default function ToastContainer({ messages }: ToastContainerProps) {
+export default function ToastContainer({
+  messages,
+  handleOnRemoveToast,
+}: ToastContainerProps) {
   const messagesWithTransitions = useTransition(messages, {
     from: { right: "-120%", opacity: 0 },
     enter: { right: "0%", opacity: 1 },
@@ -21,7 +24,14 @@ export default function ToastContainer({ messages }: ToastContainerProps) {
     <Container>
       {messagesWithTransitions((styles, item) => {
         if (item) {
-          return <Toast key={item.id} message={item} style={styles} />;
+          return (
+            <Toast
+              key={item.id}
+              message={item}
+              style={styles}
+              handleOnRemoveToast={handleOnRemoveToast}
+            />
+          );
         }
         return null;
       })}

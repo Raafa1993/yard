@@ -54,5 +54,47 @@ export default {
     warning_700: "#B54708",
     warning_800: "#93370D",
     warning_900: "#7A2E0E",
+
+    primaryBackground: "#101828",
+    secundaryBackground: "#1D2939",
+
+    surfaceContainer: "#101828",
+
+    sidebarBackground: "#101828",
+    sidebarLine: "#1D2939",
+    sidebarTextPrimary: "#FFFFFF",
+    sidebarTextSecundary: "#D0D5DD",
+
+    inputBackground: "#101828",
+    inputBorder: "#101828",
+    inputText: "#fff",
+    inputPlaceholder: "#7C7C8A",
+    inputLabel: "#EAECF0",
+
+    buttonFilterBackground: "#101828",
+    buttonFilterText: "#667085",
+
+    cardOrderBackground: "#101828",
+    cardOrderText: "#F2F4F7",
+
+    cardInfoVehicleBackground: "#101828",
+    cardInfoVehicleTitle: "#667085",
+    cardInfoVehicleDescription: "#EAECF0",
+
+    accordionBackground: "#101828",
+    accordionTitle: "#D0D5DD",
+    accordionDescription: "#475467",
+
+    cardVehiclePhotoBackground: "#101828",
+    cardVehiclePhotoImage: "#475467",
+    cardVehiclePhotoText: "#D0D5DD",
+
+    modalBackground: "#101828",
+    modalOverlay: "rgba(52, 64, 84, 0.7)",
+    modalContent: "#F2F4F7",
+
+    toastBackground: "#101828",
+
+    forgotPasswordText: "#f4ede8",
   },
 };

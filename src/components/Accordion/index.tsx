@@ -21,12 +21,14 @@ import {
   ViewHeader,
   ViewRow,
 } from "./styles";
+import { useThemeStore } from "../../../store/theme";
 interface AcordionProps {
   title: string;
   data: any;
 }
 
 export default function Accordion({ title = "", data }: AcordionProps) {
+  const { theme } = useThemeStore();
   const viewRef = useAnimatedRef<View>();
   const [isOpen, setIOpen] = useState(false);
   const open = useSharedValue(false);
@@ -39,6 +41,8 @@ export default function Accordion({ title = "", data }: AcordionProps) {
     height: height.value * progress.value + 2,
     opacity: progress.value === 0 ? 0 : withTiming(1),
   }));
+
+  const iconColor = theme === "dark" ? "#FFF" : "#101828";
 
   const handleOnActive = () => {
     if (height.value === 0) {
@@ -59,7 +63,7 @@ export default function Accordion({ title = "", data }: AcordionProps) {
           <Feather
             name={isOpen ? "minus" : "plus"}
             size={20}
-            color={isOpen ? "#FFF" : "#4D7ED7"}
+            color={isOpen ? iconColor : "#4D7ED7"}
           />
         </ViewHeader>
       </TouchableWithoutFeedback>

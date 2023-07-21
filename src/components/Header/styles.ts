@@ -4,7 +4,7 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: ${({ theme }) => theme.colors.gray_900};
+  background: ${({ theme }) => theme.colors.primaryBackground};
   padding: 24px 12px;
 `;
 

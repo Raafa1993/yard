@@ -13,6 +13,8 @@ import {
   TextStyleLegend,
   ViewLEgendGroup,
 } from "./styles";
+import Button from "../../../components/Button";
+import { View } from "react-native";
 export interface List {
   name: string;
   items: ListProps[];
@@ -128,6 +130,9 @@ export default function Checklist() {
         <Accordion title="Dianteira" data={listTable} />
         <Accordion title="Farol" data={listTable} />
       </ScrollView>
+      {/* <View style={{ padding: 16 }}>
+        <Button text="Confirmar Entrega" />
+      </View> */}
     </Container>
   );
 }

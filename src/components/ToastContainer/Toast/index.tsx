@@ -3,13 +3,12 @@ import { Text, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import { ToastMessage } from "../../../@types/ToastMessage";
-import { useToast } from "../../../hooks/toast";
-
 import { Container, Content, TextDescription, ViewIcon } from "./styles";
-
+import { useThemeStore } from "../../../../store/theme";
 interface ToastProps {
   message: ToastMessage;
   style: object;
+  handleOnRemoveToast: (id: any) => void;
 }
 
 const icons = {
@@ -20,36 +19,53 @@ const icons = {
   light: <Feather name="alert-circle" size={24} color="#667085" />,
 };
 
-export default function Toast({ message, style }: ToastProps) {
-  const { removeToast } = useToast();
+export default function Toast({
+  message,
+  style,
+  handleOnRemoveToast,
+}: ToastProps) {
+  const { theme } = useThemeStore();
+
+  const themeColors = {
+    bg: theme === "dark" ? "#101828" : "#EAECF0",
+    title: theme === "dark" ? "#FFF" : "#1D2939",
+    description: theme === "dark" ? "#d0d5dd" : "#101828",
+    icon: theme === "dark" ? "#FFF" : "#F04438",
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      removeToast(message.id);
+      handleOnRemoveToast(message.id);
     }, 3000);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [message.id, removeToast]);
+  }, [message.id, handleOnRemoveToast]);
 
   return (
     <Container
       type={message.type}
       hasdescription={Number(!!message.description)}
-      style={style}
+      style={[style, { backgroundColor: themeColors.bg }]}
     >
       <ViewIcon>{icons[message.type || "info"]}</ViewIcon>
 
       <Content>
-        <Text style={{ color: "#FFF" }}>{message.title}</Text>
+        <Text
+          style={{ color: themeColors.title, fontFamily: "Inter_500Medium" }}
+        >
+          {message.title}
+        </Text>
         {message.description && (
-          <TextDescription>{message.description}</TextDescription>
+          <TextDescription style={{ color: themeColors.description }}>
+            {message.description}
+          </TextDescription>
         )}
       </Content>
 
       <TouchableOpacity
-        onPress={() => removeToast(message.id)}
+        onPress={() => handleOnRemoveToast(message.id)}
         style={{
           position: "absolute",
           right: 16,
@@ -57,7 +73,7 @@ export default function Toast({ message, style }: ToastProps) {
           backgroundColor: "transparent",
         }}
       >
-        <Feather name="x-circle" size={22} color="#FFF" />
+        <Feather name="x-circle" size={22} color={themeColors.icon} />
       </TouchableOpacity>
     </Container>
   );

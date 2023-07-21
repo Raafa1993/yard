@@ -1,7 +1,12 @@
 import { styled } from "styled-components/native";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
 
 export const Container = styled.View`
   flex: 1;
+`;
+
+export const ViewDrawerScroll = styled(DrawerContentScrollView)`
+  background-color: ${({ theme }) => theme.colors.sidebarBackground};
 `;
 
 export const ViewUser = styled.View`
@@ -10,7 +15,7 @@ export const ViewUser = styled.View`
   gap: 12px;
   padding: 18px 12px;
   border-bottom-width: 1px;
-  border-color: ${({ theme }) => theme.colors.gray_800};
+  border-color: ${({ theme }) => theme.colors.sidebarLine};
   margin-bottom: 14px;
 `;
 
@@ -20,19 +25,19 @@ export const ViewUserProfile = styled.View`
   width: 52px;
   height: 52px;
   border-radius: 50px;
-  background: ${({ theme }) => theme.colors.gray_800};
+  background: ${({ theme }) => theme.colors.primary_900};
 `;
 
 export const ViewUserInfo = styled.View``;
 
 export const TextNameUser = styled.Text`
-  color: #fff;
+  color: ${({ theme }) => theme.colors.sidebarTextPrimary};
   font-size: 16px;
   font-family: "Inter_600SemiBold";
 `;
 
 export const TextLocation = styled.Text`
-  color: #d1d3d4;
+  color: ${({ theme }) => theme.colors.sidebarTextSecundary};
   font-size: 12px;
   font-family: "Inter_500Medium";
 `;
@@ -51,7 +56,7 @@ export const ViewList = styled.View`
 export const ViewSection = styled.View`
   padding: 16px 16px;
   border-top-width: 1px;
-  border-color: ${({ theme }) => theme.colors.gray_800};
+  border-color: ${({ theme }) => theme.colors.sidebarLine};
 `;
 
 export const TextSection = styled.Text`
@@ -67,15 +72,15 @@ export const ViewSectionItem = styled.View`
 
 export const TextSectionItem = styled.Text`
   font-size: 16px;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.sidebarTextPrimary};
 `;
 
 export const ButtonSignOut = styled.TouchableOpacity.attrs({
   activeOpacity: 0.9,
 })`
-  background: ${({ theme }) => theme.colors.gray_900};
+  background: ${({ theme }) => theme.colors.sidebarBackground};
   border-top-width: 1px;
-  border-color: ${({ theme }) => theme.colors.gray_800};
+  border-color: ${({ theme }) => theme.colors.sidebarLine};
   padding: 12px;
   flex-direction: row;
   gap: 18px;

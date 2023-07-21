@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 interface ToastContextData {
   addToast(message: Omit<ToastMessage, "id">): void;
   removeToast(id: string): void;
+  messagens: ToastMessage[];
 }
 
 const ToastContext = createContext<ToastContextData>({} as ToastContextData);
@@ -40,8 +41,11 @@ const ToastProvider: React.FC<BoxProps> = ({ children }) => {
   }, []);
 
   return (
-    <ToastContext.Provider value={{ addToast, removeToast }}>
-      <ToastContainer messages={messagens} />
+    <ToastContext.Provider value={{ addToast, removeToast, messagens }}>
+      <ToastContainer
+        messages={messagens}
+        handleOnRemoveToast={(id) => removeToast(id)}
+      />
       {children}
     </ToastContext.Provider>
   );
@@ -49,6 +53,10 @@ const ToastProvider: React.FC<BoxProps> = ({ children }) => {
 
 function useToast(): ToastContextData {
   const context = useContext(ToastContext);
+
+  if (!context) {
+    throw new Error("useToast must be used within an AuthProvider");
+  }
 
   return context;
 }

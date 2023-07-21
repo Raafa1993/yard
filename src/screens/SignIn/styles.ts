@@ -6,12 +6,12 @@ export const Container = styled.View`
   align-items: center;
   justify-content: center;
   padding: 0 30px ${Platform.OS === "android" ? 0 : 30}px;
-  background: ${({ theme }) => theme.colors.gray_800};
+  background: ${({ theme }) => theme.colors.secundaryBackground};
 `;
 
 export const Title = styled.Text`
   font-size: 24px;
-  color: #f4ede8;
+  color: ${({ theme }) => theme.colors.inputText};
   margin: 64px 0 24px;
 `;
 
@@ -20,7 +20,7 @@ export const ForgotPassword = styled.TouchableOpacity`
 `;
 
 export const ForgotPasswordText = styled.Text`
-  color: #f4ede8;
+  color: ${({ theme }) => theme.colors.forgotPasswordText};
   font-size: 16px;
 `;
 

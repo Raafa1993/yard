@@ -4,13 +4,13 @@ import { OrderProps } from "../../components/Order";
 
 export const Container = styled.View`
   flex: 1;
-  background: ${({ theme }) => theme.colors.gray_800};
+  background: ${({ theme }) => theme.colors.secundaryBackground};
 `;
 
 export const Header = styled.View`
   padding: 24px;
   /* height: 98px; */
-  background: ${({ theme }) => theme.colors.gray_900};
+  background: ${({ theme }) => theme.colors.primaryBackground};
 
   flex-direction: row;
   justify-content: space-between;

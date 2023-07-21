@@ -1,19 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import CheckBox from "../CheckBox";
 import { TextRow } from "./styles";
+import { useThemeStore } from "../../../store/theme";
 
 const LIST_ITEM_HEIGHT = 54;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#101828",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderColor: "#1D2939",
     height: LIST_ITEM_HEIGHT,
   },
 });
@@ -29,7 +28,8 @@ interface ListItemProps {
 }
 
 const ListItem = ({ item, isLast }: ListItemProps) => {
-  const bottomRadius = isLast ? 8 : 0;
+  const { theme } = useThemeStore();
+  const bottomRadius = isLast ? 5 : 0;
   return (
     <View
       style={[
@@ -37,6 +37,8 @@ const ListItem = ({ item, isLast }: ListItemProps) => {
         {
           borderBottomLeftRadius: bottomRadius,
           borderBottomRightRadius: bottomRadius,
+          backgroundColor: theme === "dark" ? "#101828" : "#F2F4F7",
+          borderColor: theme === "dark" ? "#1D2939" : "#98A2B3",
         },
       ]}
     >
