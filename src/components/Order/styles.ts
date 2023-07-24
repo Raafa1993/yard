@@ -7,7 +7,7 @@ interface StatusCOlorProps {
 export const Pressable = styled.Pressable``;
 
 export const ViewContainer = styled.View`
-  background-color: ${({ theme }) => theme.colors.gray_900};
+  background-color: ${({ theme }) => theme.colors.cardOrderBackground};
   margin-bottom: 12px;
   overflow: hidden;
   position: relative;
@@ -28,7 +28,7 @@ export const ViewInfo = styled.View`
 `;
 
 export const Text = styled.Text`
-  color: ${({ theme }) => theme.colors.gray_100};
+  color: ${({ theme }) => theme.colors.cardOrderText};
   font-size: 14px;
   font-family: "Inter_700Bold";
   margin-bottom: 4px;

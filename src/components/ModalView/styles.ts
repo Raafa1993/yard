@@ -8,7 +8,7 @@ export const Modal = styled.Modal.attrs({
 
 export const Overlay = styled.View`
   flex: 1;
-  background: rgba(52, 64, 84, 0.7);
+  background: ${({ theme }) => theme.colors.modalOverlay};
   align-items: center;
   justify-content: center;
 `;
@@ -19,12 +19,12 @@ export const Container = styled.View`
   justify-content: center;
   padding: 20px 16px;
   border-radius: 8px;
-  background: ${({ theme }) => theme.colors.gray_900};
+  background: ${({ theme }) => theme.colors.modalBackground};
 `;
 
 export const Content = styled.View`
   flex: 1;
-  background: ${({ theme }) => theme.colors.gray_100};
+  background: ${({ theme }) => theme.colors.modalContent};
 `;
 
 export const Bar = styled.View`

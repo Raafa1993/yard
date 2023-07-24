@@ -8,13 +8,13 @@ export const Container = styled.TouchableOpacity.attrs({ activeOpacity: 0.9 })`
   margin: 4px;
   padding: 10px;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.colors.gray_900};
+  background-color: ${({ theme }) => theme.colors.cardVehiclePhotoBackground};
   gap: 6px;
 `;
 
 export const ViewImage = styled.View`
   border-radius: 2px;
-  background-color: ${({ theme }) => theme.colors.gray_600};
+  background-color: ${({ theme }) => theme.colors.cardVehiclePhotoImage};
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -28,6 +28,6 @@ export const ViewVehicleInfo = styled.View`
 `;
 
 export const TextInfoVehicle = styled.Text`
-  color: ${({ theme }) => theme.colors.gray_300};
+  color: ${({ theme }) => theme.colors.cardVehiclePhotoText};
   font-size: 14px;
 `;

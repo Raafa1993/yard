@@ -10,6 +10,7 @@ import {
 } from "./styles";
 import Button from "../../../components/Button";
 import { Input } from "../../../components/Input";
+import { View } from "react-native";
 
 export default function Information({ route }: any) {
   const { orderId } = route.params;
@@ -92,8 +93,10 @@ export default function Information({ route }: any) {
             <TextInfoDescription>11dsa1d3sd54sad4sa5dsa46</TextInfoDescription>
           </ViewInfo>
         </ViewCardInfo>
-        <Button text="Confirmar Entrega" />
       </ScrollView>
+      {/* <View style={{ padding: 16 }}>
+        <Button text="Confirmar Entrega" />
+      </View> */}
     </Container>
   );
 }

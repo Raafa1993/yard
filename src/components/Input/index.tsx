@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { TextInputProps } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { Container, IconContainer, InputText, Content, Label } from "./styles";
+import {
+  Container,
+  IconContainer,
+  InputText,
+  ViewIconRight,
+  Content,
+  Label,
+} from "./styles";
 
 export type InputProps = TextInputProps & {
   icon?: React.ComponentProps<typeof Feather>["name"];
+  iconRight?: ReactNode;
   value?: string;
   label?: string;
 };
 
-export function Input({ icon, value, label, ...rest }: InputProps) {
+export function Input({ icon, value, iconRight, label, ...rest }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -24,14 +32,14 @@ export function Input({ icon, value, label, ...rest }: InputProps) {
 
   return (
     <Container>
-      {label && <Label>text label</Label>}
+      {label && <Label>{label}</Label>}
       <Content isFocused={isFocused}>
         {icon && (
           <IconContainer>
             <Feather
               name={icon}
               size={24}
-              color={isFocused || isFilled ? "#4D7ED7" : "#D0D5DD"}
+              color={isFocused || isFilled ? "#4D7ED7" : "#98A2B3"}
             />
           </IconContainer>
         )}
@@ -41,9 +49,12 @@ export function Input({ icon, value, label, ...rest }: InputProps) {
           onBlur={handleInputBlur}
           isFocused={isFocused}
           isIcon={!!icon}
+          isIconRight={!!iconRight}
           value={value}
           {...rest}
         />
+
+        {iconRight && <ViewIconRight>{iconRight}</ViewIconRight>}
       </Content>
     </Container>
   );

@@ -6,18 +6,21 @@ interface ColorProps {
 
 export const Container = styled.View`
   flex: 1;
-  background: #1d2939;
-  padding: 16px;
+  background: ${({ theme }) => theme.colors.secundaryBackground};
 `;
 
-export const ScrollView = styled.ScrollView``;
+export const ScrollView = styled.ScrollView`
+  padding: 0px 16px;
+  margin-top: 16px;
+  flex: 1;
+`;
 
 export const ViewCardInfo = styled.View`
   padding: 20px;
   border-radius: 5px;
   margin-bottom: 12px;
 
-  background: ${({ theme }) => theme.colors.gray_900};
+  background: ${({ theme }) => theme.colors.cardInfoVehicleBackground};
 `;
 
 export const ViewInfo = styled.View``;
@@ -45,11 +48,11 @@ export const TextInfoTitle = styled.Text`
   font-size: 14px;
   font-family: "Inter_400Regular";
   margin-bottom: 6px;
-  color: ${({ theme }) => theme.colors.gray_500};
+  color: ${({ theme }) => theme.colors.cardInfoVehicleTitle};
 `;
 
 export const TextInfoDescription = styled.Text`
   font-size: 12px;
   font-family: "Inter_400Regular";
-  color: ${({ theme }) => theme.colors.gray_200};
+  color: ${({ theme }) => theme.colors.cardInfoVehicleDescription};
 `;

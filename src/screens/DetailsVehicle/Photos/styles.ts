@@ -2,12 +2,15 @@ import { styled } from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
-  background: #1d2939;
-  padding: 16px;
+  background: ${({ theme }) => theme.colors.secundaryBackground};
 `;
 
 export const ContainerModalView = styled.View`
   width: 100%;
+  padding: 16px;
+
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ViewPreviewImage = styled.ImageBackground`
@@ -22,7 +25,7 @@ export const ViewPreviewImage = styled.ImageBackground`
 export const TextPreview = styled.Text`
   font-size: 18px;
   font-family: "Inter_600SemiBold";
-  color: ${({ theme }) => theme.colors.gray_50};
+  color: ${({ theme }) => theme.colors.cardInfoVehicleTitle};
   margin-bottom: 20px;
   text-align: center;
 `;

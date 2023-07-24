@@ -8,27 +8,22 @@ interface ContainerProps {
 
 const toastTypeVariations = {
   success: css`
-    background: #101828;
     color: #027a48;
     border-color: #6ce9a6;
   `,
   danger: css`
-    background: #101828;
     color: #b42318;
     border-color: #d92d20;
   `,
   warning: css`
-    background: #101828;
     color: #b54708;
     border-color: #f79009;
   `,
   info: css`
-    background: #101828;
     color: #0045b5;
     border-color: #0089fa;
   `,
   light: css`
-    background: #101828;
     color: #98a2b3;
     border-color: #d0d5dd;
   `,
@@ -52,7 +47,7 @@ export const TextDescription = styled.Text`
   font-size: 14px;
   opacity: 0.8;
   line-height: 20px;
-  color: #d0d5dd;
+  font-family: "Inter_600SemiBold";
 `;
 
 export const Content = styled.View`

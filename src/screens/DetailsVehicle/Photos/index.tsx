@@ -38,6 +38,31 @@ const fotoData = [
     image: "",
     title: "03 - Lateral",
   },
+  {
+    id: 3,
+    image: "",
+    title: "03 - Lateral",
+  },
+  {
+    id: 4,
+    image: "",
+    title: "03 - Lateral",
+  },
+  {
+    id: 5,
+    image: "",
+    title: "03 - Lateral",
+  },
+  {
+    id: 6,
+    image: "",
+    title: "03 - Lateral",
+  },
+  {
+    id: 7,
+    image: "",
+    title: "03 - Lateral",
+  },
 ];
 
 const numColumn = 2;
@@ -96,6 +121,8 @@ export default function Photos() {
   return (
     <Container>
       <FlatList
+        showsVerticalScrollIndicator={true}
+        showsHorizontalScrollIndicator={false}
         data={data}
         numColumns={numColumn}
         keyExtractor={(item: any) => item.id}
@@ -105,8 +132,11 @@ export default function Photos() {
             handleOnAddPhoto={() => handleOnOpenModal(item)}
           />
         )}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 60 }}
+        contentContainerStyle={{
+          paddingBottom: 60,
+          paddingTop: 12,
+          paddingHorizontal: 16,
+        }}
       />
 
       <CardCamera
@@ -149,7 +179,7 @@ export default function Photos() {
         </ContainerModalView>
       </ModalView>
 
-      <Button text="Confirmar Entrega"></Button>
+      {/* <Button text="Confirmar Entrega"></Button> */}
     </Container>
   );
 }

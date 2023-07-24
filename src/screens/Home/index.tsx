@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Image, RefreshControl, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -9,9 +9,9 @@ import { Input } from "../../components/Input";
 import ButtonFilter from "../../components/ButtonFilter";
 import Order, { OrderProps } from "../../components/Order";
 
-import { useQueryClient } from "@tanstack/react-query";
-
 import Logo from "../../assets/logoName.png";
+import LogoLight from "../../assets/LogoLight.png";
+
 import {
   Container,
   Content,
@@ -22,8 +22,8 @@ import {
 } from "./styles";
 import Button from "../../components/Button";
 import { useToast } from "../../hooks/toast";
-import api from "../../services/api";
 import useFetch from "../../hooks/useFetch";
+import { useThemeStore } from "../../../store/theme";
 
 const orderList = [
   {
@@ -86,6 +86,7 @@ const orderList = [
 
 export function Home({ navigation }: any) {
   const { addToast } = useToast();
+  const { theme } = useThemeStore();
   const [statusSelected, setStatusSelected] = useState<"remocao" | "vmc">(
     "remocao"
   );
@@ -115,7 +116,7 @@ export function Home({ navigation }: any) {
       <StatusBar style="light" translucent={false} backgroundColor="#101828" />
 
       <Header>
-        <Image source={Logo} />
+        <Image source={theme === "dark" ? Logo : LogoLight} />
 
         <SignOutButton onPress={() => navigation.openDrawer()}>
           <Feather name="menu" color="#fff" size={26} />
@@ -175,13 +176,7 @@ export function Home({ navigation }: any) {
       <View style={{ paddingHorizontal: 16, marginBottom: 12 }}>
         <Button
           text="Cadastrar Entrega Direta"
-          onPress={() => {
-            addToast({
-              title: "Atenção",
-              description: "Mensagem falhou",
-              type: "success",
-            });
-          }}
+          onPress={() => history.navigate("registerVehicle")}
         />
       </View>
     </Container>

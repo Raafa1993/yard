@@ -1,16 +1,12 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import Information from "../screens/DetailsVehicle/Information";
-import Checklist from "../screens/DetailsVehicle/Checklist";
-import Photos from "../screens/DetailsVehicle/Photos";
 import { useThemeStore } from "../../store/theme";
-import Layout from "../screens/DetailsVehicle/Layout";
-import { Children } from "react";
+import RegisterComplete from "../screens/RegisterVehicle/RegisterComplete";
+import { RegisterPartial } from "../screens/RegisterVehicle/RegisterPartial";
 
 const TopTabs = createMaterialTopTabNavigator();
 
-export default function TopTabsGroup({ route }: any) {
-  const { orderId } = route.params;
+export default function RegisterVehicle() {
   const { theme } = useThemeStore();
   const topTabStyles = {
     color: theme === "dark" ? "#FFF" : "#4D7ED7",
@@ -37,21 +33,8 @@ export default function TopTabsGroup({ route }: any) {
         },
       }}
     >
-      <TopTabs.Screen
-        name="information"
-        component={Information}
-        initialParams={{ orderId }}
-      />
-      <TopTabs.Screen
-        name="Checklist"
-        component={Checklist}
-        initialParams={{ orderId }}
-      />
-      <TopTabs.Screen
-        name="Fotos"
-        component={Photos}
-        initialParams={{ orderId }}
-      />
+      <TopTabs.Screen name="Completo" component={RegisterComplete} />
+      <TopTabs.Screen name="Parcial" component={RegisterPartial} />
     </TopTabs.Navigator>
   );
 }

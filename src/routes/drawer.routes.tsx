@@ -3,16 +3,20 @@ import { Feather } from "@expo/vector-icons";
 import StackRoutes from "./stack.routes";
 import { Users } from "../screens/Users";
 import Sidebar from "../components/Sidebar";
+import { useThemeStore } from "../../store/theme";
 
 const Drawer = createDrawerNavigator();
 
 export default function DrawerRoutes() {
+  const { theme } = useThemeStore();
+  const inactiveColor = theme === "dark" ? "#FFFFFF" : "#98A2B3";
+
   return (
     <Drawer.Navigator
       drawerContent={(props) => <Sidebar {...props} />}
       screenOptions={{
         drawerActiveTintColor: "#4D7ED7",
-        drawerInactiveTintColor: "#fff",
+        drawerInactiveTintColor: inactiveColor,
         headerShown: false,
         drawerLabelStyle: {
           marginLeft: -24,
@@ -28,7 +32,7 @@ export default function DrawerRoutes() {
           drawerIcon: ({ focused }) => (
             <Feather
               name="home"
-              color={focused ? "#4D7ED7" : "#fff"}
+              color={focused ? "#4D7ED7" : inactiveColor}
               size={24}
             />
           ),
@@ -43,7 +47,7 @@ export default function DrawerRoutes() {
           drawerIcon: ({ focused }) => (
             <Feather
               name="settings"
-              color={focused ? "#4D7ED7" : "#fff"}
+              color={focused ? "#4D7ED7" : inactiveColor}
               size={24}
             />
           ),

@@ -3,7 +3,7 @@ import { styled } from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.gray_900};
+  background-color: ${({ theme }) => theme.colors.accordionBackground};
   border-radius: 5px;
   margin-bottom: 12px;
 `;
@@ -18,7 +18,7 @@ export const ViewHeader = styled.View`
 export const TextTitle = styled.Text`
   font-size: 16px;
   font-family: "Inter_700Bold";
-  color: ${({ theme }) => theme.colors.gray_300};
+  color: ${({ theme }) => theme.colors.accordionTitle};
 `;
 
 export const ViewContent = styled(Animated.View)`
@@ -31,12 +31,12 @@ export const ViewRow = styled.View`
   padding: 0 34px;
   border-bottom: 1px;
   border-bottom-width: 1px;
-  border-color: #1d2939;
+  border-color: #98a2b3;
   gap: 26px;
 `;
 
 export const TextRow = styled.Text`
   font-size: 16px;
-  color: #d0d5dd;
+  color: ${({ theme }) => theme.colors.accordionDescription};
   height: 28px;
 `;
